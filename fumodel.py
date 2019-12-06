@@ -11923,8 +11923,8 @@ class Model_Frm(wx.MiniFrame):
     def CreatePanel(self):
         # fu logo
         bitmap=self.FULogo()
-        self.SetBackgroundColour('lighyt gray')
-        self.SetTitle('Openning FU')
+        self.SetBackgroundColour('light gray')
+        self.SetTitle('Opening FU')
         wx.StaticBitmap(self,-1,bitmap,(30,20),(40,28))
         wx.StaticText(self,-1,'Welcome to FU ...',pos=(90,30),size=(180,22)) 
         # timer    
