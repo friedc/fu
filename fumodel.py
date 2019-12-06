@@ -3,7 +3,6 @@
 
 import sys
 from numpy import rank
-from nt import lstat
 sys.path.insert(0,'.')
 import wx
 import os

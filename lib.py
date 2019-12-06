@@ -15,7 +15,6 @@ import sys
 import platform as platformos
 import scipy
 from pip._vendor.distlib.compat import ChainMap
-from nt import lstat
 if int(scipy.__version__.split('.')[1]) >= 11:
     from scipy.optimize import minimize
 else:
