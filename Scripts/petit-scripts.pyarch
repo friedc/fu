@@ -1,0 +1,27 @@
+# Memory file backup archive. Created by kitaura at 2016/03/26 09:56:57
+#
+MEMFILE: saveimage.py
+imgfilename=lib.GetFileName(None,"img(*.png)|*.png","w",True)
+if imgfilename != "": fum.SaveCanvasImage(imgfilename)ENDMEM
+
+
+
+ENDMEM
+MEMFILE: readpdb.py
+filename=lib.GetFileName(None,"pdb(*.pdb)|*.pdb","r",True)
+if filename != "": fum.ReadFiles(filename,True)
+
+
+ENDMEM
+MEMFILE: changebgcolorl.py
+fum.ChangeBackgroundColor([1.0,1.0,1.0,1.0]) # white
+
+
+
+
+ENDMEM
+MEMFILE: changemodel.py
+fum.ChangeDrawModel(2)
+
+
+ENDMEM

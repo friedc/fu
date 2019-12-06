@@ -1,0 +1,52 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module fmopdb ! in 
+    interface  ! in :fmopdb
+        subroutine pdbmolout(pdbfil,inprot,icprot,iprot,ihprot,ihkeep,ihwat,atmnmb0,atmnam0,resnam0,chainnam0,resnmb0,cc,an,natm0) ! in :fmopdb:fmopdb.f
+            character*80 intent(in) :: pdbfil
+            integer intent(in) :: inprot
+            integer intent(in) :: icprot
+            integer intent(in) :: iprot
+            integer intent(in) :: ihprot
+            integer intent(in) :: ihkeep
+            integer intent(in) :: ihwat
+            integer intent(out), dimension(120000) :: atmnmb0
+            character intent(out), dimension(120000,4),intent(c) :: atmnam0
+            character intent(out), dimension(120000,3),intent(c) :: resnam0
+            character intent(out), dimension(120000,1),intent(c) :: chainnam0
+            integer intent(out), dimension(120000) :: resnmb0
+            real*4 intent(out), dimension(120000,3) :: cc
+            integer intent(out), dimension(120000) :: an
+            integer intent(out) :: natm0
+            integer :: nres
+            integer :: natres
+            integer dimension(50001) :: istres
+            integer dimension(50000) :: ichres
+            integer dimension(50000) :: numres
+            character dimension(50000,3),intent(c) :: resnam
+            character dimension(50000,1),intent(c) :: chanam
+            integer :: nmol
+            integer :: natmol
+            integer dimension(50001) :: istmol
+            integer dimension(50000) :: ichmol
+            integer dimension(50000) :: nummol
+            character dimension(50000,3),intent(c) :: molnam
+            integer dimension(120000) :: ian
+            real*4 dimension(120000) :: x
+            real*4 dimension(120000) :: y
+            real*4 dimension(120000) :: z
+            integer :: natm
+            integer :: ndum1
+            integer dimension(120000) :: iatfrg
+            character dimension(120000,4),intent(c) :: atmnam
+            common /resinf/ nres,natres,istres,ichres,numres,resnam,chanam
+            common /molinf/ nmol,natmol,istmol,ichmol,nummol,molnam
+            common /atmxyz/ ian,x,y,z
+            common /atminf/ natm,ndum1,iatfrg,atmnam
+        end subroutine pdbmolout
+    end interface 
+end python module fmopdb
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/

@@ -1,0 +1,173 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module fortlib ! in 
+    interface  ! in :fortlib
+        subroutine distance(cc,iopt,rij,natm,ndim) ! in :temp:temp.f
+            real(kind=8), intent(in), dimension(natm,ndim) :: cc
+            integer, intent(in) :: iopt
+            real(kind=8), intent(out), dimension(natm*(natm-1)/2),depend(natm) :: rij
+            integer, optional,check(shape(cc,0)==natm),depend(cc) :: natm=shape(cc,0)
+            integer, optional,check(shape(cc,1)==ndim),depend(cc) :: ndim=shape(cc,1)
+        end subroutine distance
+        subroutine find_contact_atoms(cc1,cc2,rmin,rmax,natm,iatm,ndim,natm1,natm2) ! in :temmp:temp.f
+            real(kind=8), intent(in), dimension(natm1,ndim) :: cc1
+            real(kind=8), intent(in), dimension(natm2,ndim),depend(ndim) :: cc2
+            real(kind=8), intent(in) :: rmin
+            real(kind=8), intent(in) :: rmax
+            integer, intent(out) :: natm
+            integer, intent(out), dimension(natm2),depend(natm2) :: iatm
+            integer, optional,check(shape(cc1,1)==ndim),depend(cc1) :: ndim=shape(cc1,1)
+            integer, optional,check(shape(cc1,0)==natm1),depend(cc1) :: natm1=shape(cc1,0)
+            integer, optional,check(shape(cc2,0)==natm2),depend(cc2) :: natm2=shape(cc2,0)
+        end subroutine find_contact_atoms
+
+        subroutine find_contact_atoms0(cc1,cc2,rmin,rmax,iopt,npair,iatm,jatm,rij,ndim,natm1,natm2) ! in :temp2:temp2.f
+            real(kind=8),intent(in), dimension(natm1,ndim) :: cc1
+            real(kind=8),intent(in), dimension(natm2,ndim),depend(ndim) :: cc2
+            real(kind=8),intent(in) :: rmin
+            real(kind=8),intent(in) :: rmax
+            integer intent(in) :: iopt
+            integer intent(out) :: npair
+            integer, intent(out), dimension(natm1*natm2),depend(natm1,natm2) :: iatm
+            integer, intent(out), dimension(natm1*natm2),depend(natm1,natm2) :: jatm
+            real*8, intent(out), dimension(natm1*natm2),depend(natm1,natm2) :: rij
+            integer, optional,check(shape(cc1,1)==ndim),depend(cc1) :: ndim=shape(cc1,1)
+            integer, optional,check(shape(cc1,0)==natm1),depend(cc1) :: natm1=shape(cc1,0)
+            integer, optional,check(shape(cc2,0)==natm2),depend(cc2) :: natm2=shape(cc2,0)
+        end subroutine find_contact_atoms0
+        subroutine find_contact_atoms1(cc,rad,margin,n,iatm,jatm,ndim,natm) ! in :fuflib:fuflib.f
+            real(kind=8), intent(in), dimension(natm,ndim) :: cc
+            real(kind=8), intent(in), dimension(natm),depend(natm) :: rad
+            real(kind=8), intent(in) :: margin
+            integer, intent(out) :: n
+            integer, intent(out), dimension(10 * natm),depend(natm) :: iatm
+            integer, intent(out), dimension(10 * natm),depend(natm) :: jatm
+            integer, optional,check(shape(cc,1)==ndim),depend(cc) :: ndim=shape(cc,1)
+            integer, optional,check(shape(cc,0)==natm),depend(cc) :: natm=shape(cc,0)
+        end subroutine find_contact_atoms1
+        subroutine find_contact_atoms2(cc,rmin,rmax,iopt,npair,iatm,jatm,rij,natm,ndim) ! in :temp:temp.f
+            real(kind=8), intent(in), dimension(natm,ndim) :: cc
+            real(kind=8), intent(in) :: rmin
+            real(kind=8), intent(in) :: rmax
+            integer, intent(in) :: iopt
+            integer, intent(out) :: npair
+            integer, intent(out), dimension(10 * natm),depend(natm) :: iatm
+            integer, intent(out), dimension(10 * natm),depend(natm) :: jatm
+            real(kind=8), intent(out), dimension(10 * natm),depend(natm) :: rij
+            integer, optional,check(shape(cc,0)==natm),depend(cc) :: natm=shape(cc,0)
+            integer, optional,check(shape(cc,1)==ndim),depend(cc) :: ndim=shape(cc,1)
+        end subroutine find_contact_atoms2
+        subroutine find_contact_atoms3(x,y,z,cc,rmin,rmax,iopt,npnt,iatm,rij,natm,ndim) ! in :temp:temp.f
+            real(kind=8), intent(in), :: x
+            real(kind=8), intent(in), :: y
+            real(kind=8), intent(in), :: z
+            real(kind=8), intent(in), dimension(natm,ndim) :: cc
+            real(kind=8), intent(in) :: rmin,rmax
+            integer, intent(in) :: iopt
+            integer, intent(out) :: npnt
+            integer, intent(out), dimension(natm),depend(natm) :: iatm
+            real(kind=8), intent(out), dimension(natm),depend(natm) :: rij
+            integer, optional,check(shape(cc,0)==natm),depend(cc) :: natm=shape(cc,0)
+            integer, optional,check(shape(cc,1)==ndim),depend(cc) :: ndim=shape(cc,1)
+        end subroutine find_contact_atoms3
+        subroutine chisq_cc(cc0,cc1,chisq,natm) ! in :temp:temp.f
+            real(kind=8), intent(in), dimension(natm,3) :: cc0
+            real(kind=8), intent(in), dimension(natm,3),depend(natm) :: cc1
+            real(kind=8), intent(out) :: chisq
+            integer, optional,check(shape(cc0,0)==natm),depend(cc0) :: natm=shape(cc0,0)
+        end subroutine chisq_cc
+        subroutine dist_cc(cc0,cc1,rmin,rmax,na,iatm,r,natm) ! in :temp:temp.f
+            real(kind=8), intent(in), dimension(natm,3) :: cc0
+            real(kind=8), intent(in), dimension(natm,3),depend(natm) :: cc1
+            real(kind=8), intent(in) :: rmin
+            real(kind=8), intent(in) :: rmax
+            integer, intent(out) :: na
+            integer, intent(out), dimension(natm),depend(natm) :: iatm
+            real(kind=8), intent(out), dimension(natm),depend(natm) :: r
+            integer, optional,check(shape(cc0,0)==natm),depend(cc0) :: natm=shape(cc0,0)
+        end subroutine dist_cc
+        subroutine get_atom_at_raspos(x,y,atmseq,rasterx,rastery,iatm,nsiz) ! in :fuflib:fuflib.f
+            real(kind=8), intent(in) :: x
+            real(kind=8), intent(in) :: y
+            integer, intent(in), dimension(nsiz) :: atmseq
+            real(kind=8), intent(in), dimension(nsiz),depend(nsiz) :: rasterx
+            real(kind=8), intent(in), dimension(nsiz),depend(nsiz) :: rastery
+            integer, intent(out) :: iatm
+            integer, optional,check(len(atmseq)>=nsiz),depend(atmseq) :: nsiz=len(atmseq)
+        end subroutine get_atom_at_raspos
+        subroutine flatten_func(cc,ibnd,jbnd,rbnd,ifix,ccfix,fb,fnb1,fnb2,fz,fix,e,natm,ndim,nbnd,nfix) ! in :flattenfunc:flattenfunc.f
+            real*8, intent(in), dimension(natm,ndim) :: cc
+            integer, intent(in), dimension(nbnd) :: ibnd
+            integer, intent(in), dimension(nbnd),depend(nbnd) :: jbnd
+            real*8, intent(in), dimension(nbnd),depend(nbnd) :: rbnd
+            integer, intent(in), dimension(nfix) :: ifix
+            real*8, intent(in), dimension(nfix,ndim),depend(nfix,ndim) :: ccfix
+            real*8, intent(in) :: fb
+            real*8, intent(in) :: fnb1
+            real*8, intent(in) :: fnb2
+            real*8, intent(in) :: fz
+            real*8, intent(in) :: fix
+            real*8, intent(out) :: e
+            integer, optional,check(shape(cc,0)==natm),depend(cc) :: natm=shape(cc,0)
+            integer, optional,check(shape(cc,1)==ndim),depend(cc) :: ndim=shape(cc,1)
+            integer, optional,check(len(ibnd)>=nbnd),depend(ibnd) :: nbnd=len(ibnd)
+            integer, optional,check(len(ifix)>=nfix),depend(ifix) :: nfix=len(ifix)
+        end subroutine flattenfunc
+        subroutine flatten_func_grad(cc,ibnd,jbnd,rbnd,ifix,ccfix,fb,fnb1,fnb2,fz,fix,e,de,natm,ndim,nbnd,nfix) ! in :flattenfunc:flattenfunc.f
+            real*8, intent(in), dimension(natm,ndim) :: cc
+            integer, intent(in), dimension(nbnd) :: ibnd
+            integer, intent(in), dimension(nbnd),depend(nbnd) :: jbnd
+            real*8, intent(in), dimension(nbnd),depend(nbnd) :: rbnd
+            integer, intent(in), dimension(nfix) :: ifix
+            real*8, intent(in), dimension(nfix,ndim),depend(nfix,ndim) :: ccfix
+            real*8, intent(in) :: fb
+            real*8, intent(in) :: fnb1
+            real*8, intent(in) :: fnb2
+            real*8, intent(in) :: fz
+            real*8, intent(in) :: fix
+            real*8, intent(out) :: e
+            real*8, intent(out), dimension(natm,ndim),depend(natm,ndim) :: de
+            integer, optional,check(shape(cc,0)==natm),depend(cc) :: natm=shape(cc,0)
+            integer, optional,check(shape(cc,1)==ndim),depend(cc) :: ndim=shape(cc,1)
+            integer, optional,check(len(ibnd)>=nbnd),depend(ibnd) :: nbnd=len(ibnd)
+            integer, optional,check(len(ifix)>=nfix),depend(ifix) :: nfix=len(ifix)
+        end subroutine potfunc2dgrad
+        subroutine hb_func(cc,q,ibnd,jbnd,rbnd,ifix,ccfix,fb,fx,e,natm,ndim,nfix,nbnd) ! in :hbfunc:hbfunc.f
+            real*8, intent(in), dimension(natm,ndim) :: cc
+            real*8, intent(in), dimension(natm),depend(natm) :: q
+            integer, intent(in), dimension(nbnd) :: ibnd
+            integer, intent(in), dimension(nbnd),depend(nbnd) :: jbnd
+            real*8, intent(in), dimension(nbnd),depend(nbnd) :: rbnd
+            integer, intent(in), dimension(nfix) :: ifix
+            real*8, intent(in), dimension(nfix,ndim),depend(nfix,ndim) :: ccfix
+            real*8, intent(in) :: fb
+            real*8, intent(in) :: fx
+            real*8, intent(out) :: e
+            integer, optional,check(shape(cc,0)==natm),depend(cc) :: natm=shape(cc,0)
+            integer, optional,check(shape(cc,1)==ndim),depend(cc) :: ndim=shape(cc,1)
+            integer, optional,check(len(ifix)>=nfix),depend(ifix) :: nfix=len(ifix)
+            integer, optional,check(len(ibnd)>=nbnd),depend(ibnd) :: nbnd=len(ibnd)
+        end subroutine hb_func_grad
+        subroutine hb_func_grad(cc,q,ibnd,jbnd,rbnd,ifix,ccfix,fb,fx,e,de,natm,ndim,nfix,nbnd) ! in :hbfunc:hbfunc.f
+            real*8, intent(in), dimension(natm,ndim) :: cc
+            real*8, intent(in), dimension(natm),depend(natm) :: q
+            integer, intent(in), dimension(nbnd) :: ibnd
+            integer, intent(in), dimension(nbnd),depend(nbnd) :: jbnd
+            real*8, intent(in), dimension(nbnd),depend(nbnd) :: rbnd
+            integer, intent(in), dimension(nfix) :: ifix
+            real*8, intent(in), dimension(nfix,ndim),depend(nfix,ndim) :: ccfix
+            real*8, intent(in) :: fb
+            real*8, intent(in) :: fx
+            real*8, intent(out) :: e
+            real*8, intent(out), dimension(natm,ndim),depend(natm,ndim) :: de
+            integer, optional,check(shape(cc,0)==natm),depend(cc) :: natm=shape(cc,0)
+            integer, optional,check(shape(cc,1)==ndim),depend(cc) :: ndim=shape(cc,1)
+            integer, optional,check(len(ifix)>=nfix),depend(ifix) :: nfix=len(ifix)
+            integer, optional,check(len(ibnd)>=nbnd),depend(ibnd) :: nbnd=len(ibnd)
+        end subroutine hb_func_grad
+    end interface
+end python module fortlib
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/
