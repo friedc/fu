@@ -5,6 +5,8 @@
 # ver.0.2.0 (28Dec2014): minor changes were done.
 # ver.0.1.2 (20Feb2014): the first version.
 
+import wxversion
+wxversion.select("2.8")
 import wx
 import wx.py.crust
 import wx.lib.newevent

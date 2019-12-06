@@ -11,6 +11,8 @@ import sys
 sys.path.insert(0,'.')
 sys.path.insert(0,'./Source')
 import os
+import wxversion
+wxversion.select("2.8")
 import wx
 
 import fumodel
