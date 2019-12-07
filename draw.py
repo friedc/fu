@@ -169,6 +169,7 @@ class MolDraw():
         # create GLCanvas
         self.canvas=GLCanvas(self.mdlwin,self)
         self.canvas_size=self.canvas.GetSize()
+        self.context=wx.glcanvas.GLContext(self.canvas)
         # initialize once
         self.gl_initialized=False
         self.canvas_size=[]
@@ -1908,11 +1909,12 @@ class MolDraw():
             self.canvas.SetCursor(wx.StockCursor(wx.CURSOR_ARROW))
         else: wx.SetCursor(wx.StockCursor(wx.CURSOR_ARROW))
         
-        self.canvas.SetCurrent()
-        if not self.gl_initialized:
-            self.InitGL()
-            self.gl_initialized=True
-        self.Draw()
+        if self.canvas.IsShownOnScreen():
+            self.canvas.SetCurrent(self.context)
+            if not self.gl_initialized:
+                self.InitGL()
+                self.gl_initialized=True
+            self.Draw()
         
     def EraseBG(self):
         """ not used """
