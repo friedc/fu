@@ -18,9 +18,6 @@ sys.path.insert(0,'.')
 
 import os
 import copy
-import wxversion
-wxversion.select("2.8")
-import wx
 import wx.py.crust
 #import psutil
 import time

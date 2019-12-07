@@ -10,8 +10,6 @@ import os
 import datetime
 import copy
 #import types
-import wxversion
-wxversion.select("2.8")
 import wx
 # fu modules
 import lib

@@ -3,8 +3,6 @@
 
 import os
 #import psutil # downloaded from http://code.google.com/p/psutil/downloads/detail?name=psutil-1.0.1.win32-py2.7.exe&can=2&q=
-import wxversion
-wxversion.select("2.8")
 import wx
 # import FU modules
 import fumodel

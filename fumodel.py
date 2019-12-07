@@ -4,8 +4,6 @@
 import sys
 from numpy import rank
 sys.path.insert(0,'.')
-import wxversion
-wxversion.select("2.8")
 import wx
 import os
 import shutil

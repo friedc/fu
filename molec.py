@@ -5,8 +5,6 @@ import numpy
 import os
 import datetime
 import copy
-import wxversion
-wxversion.select("2.8")
 import wx
 
 import lib

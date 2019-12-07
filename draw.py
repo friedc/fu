@@ -4,9 +4,6 @@
 import sys
 #sys.path.insert( 0, '.' )
 
-import wxversion
-wxversion.select("2.8")
-import wx
 import wx.glcanvas
 from OpenGL.GL import *
 from OpenGL.GLU import *

@@ -10,8 +10,6 @@ import sys
 #from nt import lstat
 import cmd
 sys.path.insert(0,'.')
-import wxversion
-wxversion.select("2.8")
 import wx
 import os
 import shutil
